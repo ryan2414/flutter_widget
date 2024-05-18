@@ -17,72 +17,37 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          Container(
-            color: Colors.grey,
-            width: 100,
-            height: 100,
-            margin: EdgeInsets.symmetric(horizontal: 8),
+    return Stack(
+      children: [
+        Align(
+          alignment: Alignment.center,
+          child: Container(
+            width: 300,
+            height: 300,
+            decoration: BoxDecoration(
+                color: Colors.red, borderRadius: BorderRadius.circular(150)),
           ),
-          Container(
-            color: Colors.grey,
-            width: 100,
-            height: 100,
-            margin: EdgeInsets.symmetric(horizontal: 8),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: Container(
+            width: 280,
+            height: 280,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(140),
+            ),
           ),
-          Container(
-            color: Colors.grey,
-            width: 100,
-            height: 100,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),
-          Container(
-            color: Colors.grey,
-            width: 100,
-            height: 100,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),
-          Container(
-            color: Colors.grey,
-            width: 100,
-            height: 100,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),
-          Container(
-            color: Colors.grey,
-            width: 100,
-            height: 100,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),
-          Container(
-            color: Colors.grey,
-            width: 100,
-            height: 100,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),
-          Container(
-            color: Colors.grey,
-            width: 100,
-            height: 100,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),
-          Container(
-            color: Colors.grey,
-            width: 100,
-            height: 100,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),
-          Container(
-            color: Colors.grey,
-            width: 100,
-            height: 100,
-            margin: EdgeInsets.symmetric(horizontal: 8),
-          ),
-        ],
-      ),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: Text('Count 0',
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 32,
+              )),
+        ),
+      ],
     );
   }
 }
