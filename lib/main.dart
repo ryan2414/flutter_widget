@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,72 +24,60 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      ExampleStateless(),
-      ExampleStateful(index: 3),
-    ]);
+    return TestWidget();
   }
 }
 
-class ExampleStateless extends StatelessWidget {
-  const ExampleStateless({super.key});
+class TestWidget extends StatefulWidget {
+  const TestWidget({super.key});
+
+  @override
+  State<TestWidget> createState() => _TestWidgetState();
+}
+
+class _TestWidgetState extends State<TestWidget> {
+  int value = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: Container(
-        color: Colors.amber,
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Count : $value',
+          style: const TextStyle(fontSize: 30),
+        ),
+        TestButton(addCounter),
+      ],
     );
   }
+
+  void addCounter(int addValue) => setState(() => value += addValue);
 }
 
-class ExampleStateful extends StatefulWidget {
-  final int index;
+class TestButton extends StatelessWidget {
+  const TestButton(this.callback, {super.key});
 
-  const ExampleStateful({required this.index, super.key});
-
-  @override
-  State<ExampleStateful> createState() => _ExampleStatefulState();
-}
-
-class _ExampleStatefulState extends State<ExampleStateful> {
-  late int _index;
-  late TextEditingController textController;
-
-  @override
-  void initState() {
-    super.initState();
-    _index = widget.index;
-    textController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    textController.dispose();
-    super.dispose();
-  }
+  final Function(int) callback;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 1,
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            if (_index == 5) {
-              _index = 0;
-              return;
-            }
-
-            _index++;
-          });
-        },
-        child: Container(
-          color: Colors.blueGrey.withOpacity(_index / 5),
-          child: Center(
-            child: Text('$_index'),
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      width: double.infinity,
+      //color: Colors.amber,
+      child: InkWell(
+        onTap: () => callback.call(1),
+        onDoubleTap: () => callback.call(5),
+        onLongPress: () => callback.call(10),
+        child: Center(
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            decoration: BoxDecoration(border: Border.all()),
+            child: const Text(
+              'Up Counter',
+              style: TextStyle(fontSize: 24),
+            ),
           ),
         ),
       ),
